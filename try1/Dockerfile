@@ -20,6 +20,12 @@ RUN  cd ~ && mkdir anaconda && cd anaconda \
     && bash ${anaconda_version} -b \
     && echo "export PATH=/home/${user_name}/anaconda3/bin:$PATH" >> ~/.bashrc
     
+# install important packages
+USER ${user_name}
+RUN apt-get update \
+    && git config --global user.name "kai" \
+    && git config --global user.email "kai@katabat.com"
+
 # Create python CPU version
 # In bashrc, it will return at the beginning unless it is running at interactive mode! source cmd will not work in docker build!
 ARG python_cpu_version='3.6'
