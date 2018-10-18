@@ -20,9 +20,10 @@ RUN  cd ~ && mkdir anaconda && cd anaconda \
     && bash ${anaconda_version} -b \
     && echo "export PATH=/home/${user_name}/anaconda3/bin:$PATH" >> ~/.bashrc
     
-# install important packages
-USER ${user_name}
+# # install important packages
+USER root
 RUN apt-get update \
+    && apt-get install -y git-core \
     && git config --global user.name "kai" \
     && git config --global user.email "kai@katabat.com"
 
@@ -51,7 +52,7 @@ RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf dash /bin/sh"]
 
 # run with sudo priviledge
 # echo $password_root | sudo -S <cmd>
-#echo $password_root | sudo -S -H -u <user> <cmd>
+#e cho $password_root | sudo -S -H -u <user> <cmd>
 # link bash with /bin/sh 
 # sudo ln -sf bash /bin/sh
 # revert system to default
