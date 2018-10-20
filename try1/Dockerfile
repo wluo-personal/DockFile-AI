@@ -63,6 +63,7 @@ RUN export PATH=/home/${user_name}/anaconda3/bin:$PATH \
     && pip install keras \
     && echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64" >> /home/${user_name}/.bashrc \
     && pip install catboost \
+    && pip install xgboost \
     && source deactivate
     
 # lightgbm - GPU
