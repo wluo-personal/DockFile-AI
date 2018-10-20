@@ -59,6 +59,10 @@ RUN export PATH=/home/${user_name}/anaconda3/bin:$PATH \
     && pip install --upgrade pip \
     && conda install ipykernel \
     && python -m ipykernel install --user --name python${python_cpu_version}-GPU --display-name "python${python_gpu_version}-GPU" \
+    && pip install --upgrade tensorflow-gpu \
+    && pip install keras \
+    && echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64" >> /home/${user_name}/.bashrc \
+    && pip install catboost \
     && source deactivate
     
 # lightgbm - GPU
@@ -78,10 +82,8 @@ RUN echo $password_root | sudo -S apt-get install -y --no-install-recommends \
     && source activate python${python_gpu_version}-GPU \
     && python setup.py install --precompile \
     && cd .. \
-    && pip install --upgrade tensorflow-gpu \
-    && pip install keras \
-    && source deactivate \
-    && echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/extras/CUPTI/lib64" >> /home/${user_name}/.bashrc
+    && source deactivate 
+    
     
 # solve opencl not found issue
 USER root
