@@ -2,9 +2,11 @@
 *.log
 *.json
 *.hdf5
+adasfdsafadsf
 .ipynb_checkpoints
 *.pyc
-module_test/catboost/catboost_info/
+#module_test/
+module_test/catboost/catboost_info/*
 #*.pickle
 
 # Compiled source #
