@@ -5,7 +5,7 @@
 adasfdsafadsf
 .ipynb_checkpoints
 *.pyc
-#module_test/catboost/catboost_info/
+module_test/catboost/catboost_info/
 #module_test/catboost/catboost_info/*
 #*.pickle
 
