@@ -4,6 +4,7 @@
 *.hdf5
 .ipynb_checkpoints
 *.pyc
+module_test/catboost/catboost_info
 #*.pickle
 
 # Compiled source #
