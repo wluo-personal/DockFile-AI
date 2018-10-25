@@ -1,3 +1,5 @@
 1. source activate python3.6-GPU && conda install -c plotly plotly \
 2. pip install kaggle (https://github.com/Kaggle/kaggle-api)
   echo "export KAGGLE_CONFIG_DIR=/home/kai/data/kaggle_credential/" >> /home/kai/.bashrc
+3. conda update scikit-learn
+4. sudo apt-get install htop
