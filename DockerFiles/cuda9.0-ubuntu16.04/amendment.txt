@@ -3,3 +3,4 @@
   echo "export KAGGLE_CONFIG_DIR=/home/kai/data/kaggle_credential/" >> /home/kai/.bashrc
 3. conda update scikit-learn
 4. sudo apt-get install htop
+5. pip install sklearn-pandas
