@@ -4,3 +4,5 @@
 3. conda update scikit-learn
 4. sudo apt-get install htop
 5. pip install sklearn-pandas
+6. pip install textblob
+7. pip install jieba
