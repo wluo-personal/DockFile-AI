@@ -6,3 +6,4 @@
 5. pip install sklearn-pandas
 6. pip install textblob
 7. pip install jieba
+8. conda install -c anaconda dill
