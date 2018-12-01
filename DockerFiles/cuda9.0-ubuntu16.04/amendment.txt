@@ -7,3 +7,4 @@
 6. pip install textblob
 7. pip install jieba
 8. conda install -c anaconda dill
+9. pip install pydot
