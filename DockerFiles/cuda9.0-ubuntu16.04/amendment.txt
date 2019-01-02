@@ -9,3 +9,4 @@
 8. conda install -c anaconda dill
 9. pip install pydot
 10. conda install graphviz
+11. pip install dill
