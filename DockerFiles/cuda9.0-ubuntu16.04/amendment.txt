@@ -10,3 +10,4 @@
 9. pip install pydot
 10. conda install graphviz
 11. pip install dill
+12. conda install -c anaconda joblib 
