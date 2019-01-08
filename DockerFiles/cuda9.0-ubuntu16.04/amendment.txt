@@ -11,3 +11,4 @@
 10. conda install graphviz
 11. pip install dill
 12. conda install -c anaconda joblib 
+13. conda install -c anaconda pyyaml 
