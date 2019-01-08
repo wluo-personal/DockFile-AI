@@ -13,3 +13,5 @@
 12. conda install -c anaconda joblib 
 13. conda install -c anaconda pyyaml 
 14. pip install attrdict
+15. conda install -c anaconda click 
+
