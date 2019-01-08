@@ -12,4 +12,4 @@
 11. pip install dill
 12. conda install -c anaconda joblib 
 13. conda install -c anaconda pyyaml 
-14. conda install -c conda-forge attrdict
+14. pip install attrdict
