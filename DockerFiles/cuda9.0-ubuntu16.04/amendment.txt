@@ -15,4 +15,5 @@
 14. pip install attrdict
 15. conda install -c anaconda click 
 16. conda install sphinx
+17. sudo apt-get update| sudo apt-get install graphviz
 
