@@ -19,6 +19,10 @@
 18. sudo apt  install awscli
 19. apt-get install cron
  ### add cron to start up service
- ### sudo service cron restart
-20. sudo update-rc.d cron defaults
+ ### sudo service cron start
+ ### sudo service cron status
+20. start cron at ENTRY
+
+ENTRYPOINT
+["service","cron","start"]
 
