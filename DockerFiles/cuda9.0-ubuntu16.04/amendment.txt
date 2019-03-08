@@ -17,4 +17,5 @@
 16. conda install sphinx
 17. sudo apt-get update| sudo apt-get install graphviz
 18. sudo apt  install awscli
+19. apt-get install cron
 
