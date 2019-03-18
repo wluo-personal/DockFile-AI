@@ -26,3 +26,5 @@
 ENTRYPOINT
 ["service","cron","start"]
 
+21. sudo apt-get install zip
+
