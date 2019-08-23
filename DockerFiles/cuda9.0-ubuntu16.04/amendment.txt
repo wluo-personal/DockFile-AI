@@ -22,6 +22,7 @@
  ### sudo service cron start
  ### sudo service cron status
 20. start cron at ENTRY
+21. pip install pydot # In GPU Version
 
 ENTRYPOINT
 ["service","cron","start"]
