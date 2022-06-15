@@ -1,0 +1,7 @@
+sudo docker build -t toneymall/tf2.7-gpu .
+
+sudo docker run -it --name tfcustom --gpus all toneymall/tf2.7-gpu
+
+
+verify tf-gpu output
+python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
