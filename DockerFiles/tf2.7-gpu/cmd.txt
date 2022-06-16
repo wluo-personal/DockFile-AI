@@ -1,6 +1,16 @@
 sudo docker build -t toneymall/tf2.7-gpu .
 
+RUN docker command
+# ==========================
+# 1. simple
 sudo docker run -it --name tfcustom --gpus all toneymall/tf2.7-gpu
+
+# 2. with volume and port mapping
+sudo docker run -it -v ~/data:/home/wei/data -p 8890:8888 --name tfcustom --gpus all toneymall/tf2.7-gpu
+
+STOP docker command
+################################
+sudo docker rm -f tfcustom
 
 
 verify tf-gpu output

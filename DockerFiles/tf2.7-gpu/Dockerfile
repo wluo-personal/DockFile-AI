@@ -3,8 +3,6 @@ FROM nvidia/cuda:${cuda_version}
 ARG password_root='tomcat123'
 ARG user_name='wei'
 ARG conda_version='Miniconda3-latest-Linux-x86_64.sh'
-ARG python_cpu_version='3.6'
-ARG python_gpu_version='3.6'
 
 RUN apt-get update && echo "root:${password_root}" | chpasswd \
     && adduser ${user_name} --gecos "Wei Luo,500,12345,12345" --disabled-password \
@@ -28,8 +26,24 @@ RUN  cd ~ && mkdir miniconda && cd miniconda \
     && yes | conda create --name tf-gpu python=3.9 --no-default-packages \
     && pip install --upgrade pip \
     && pip install tensorflow-gpu==2.7 \
-
     && cd /home/${user_name} && rm -rf miniconda
+    # jupyter notebook config \
+
+ # config jupyter \
+USER ${user_name} \
+RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
+     && source base \
+
+
+    &&cd ~ && mkdir jupyter_certs && cd jupyter_certs \
+    && openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+    -subj "/C=US/ST=NewJersey/L=Edgewater/O=Wei/OU=AI/CN=wei/emailAddress=luoweiforever@gmail.com" \
+    -keyout mykey.key -out mycert.pem \
+    && jupyter notebook --generate-config
+COPY jupyter_notebook_config.py /home/${user_name}/.jupyter/
+
+
+
 
 
 USER root
