@@ -30,27 +30,27 @@ RUN  cd ~ && mkdir miniconda && cd miniconda \
     # jupyter notebook config \
 
  # config jupyter \
-USER ${user_name} \
+USER ${user_name}
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
-     && source base \
     &&cd ~ && mkdir jupyter_certs && cd jupyter_certs \
     && openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -subj "/C=US/ST=NewJersey/L=Edgewater/O=Wei/OU=AI/CN=wei/emailAddress=luoweiforever@gmail.com" \
     -keyout mykey.key -out mycert.pem \
+    && mkdir ~/.jupyter \
+    && mkdir ~/.jupyter/nbconfig \
+    && mkdir ~/.jupyter/custom \
     && jupyter notebook --generate-config
-COPY jupyter_notebook_config.py /home/${user_name}/.jupyter/
 
 
 
+COPY ./jupyter/jupyter_notebook_config.py /home/${user_name}/.jupyter
+COPY ./jupyter/nbconfig /home/${user_name}/.jupyter/nbconfig
+COPY ./jupyter/custom /home/${user_name}/.jupyter/custom
 
 
 USER root
 RUN apt-get update && apt-get clean
 
-# link bash with /bin/sh. RUN command default to use /bin/sh instead of /bin/bash
-# RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf bash /bin/sh"]
-# revoke bash with /bin/sh
-RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf dash /bin/sh"]
 
 
 
