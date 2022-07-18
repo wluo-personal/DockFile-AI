@@ -33,8 +33,6 @@ RUN  cd ~ && mkdir miniconda && cd miniconda \
 USER ${user_name} \
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
      && source base \
-
-
     &&cd ~ && mkdir jupyter_certs && cd jupyter_certs \
     && openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -subj "/C=US/ST=NewJersey/L=Edgewater/O=Wei/OU=AI/CN=wei/emailAddress=luoweiforever@gmail.com" \
