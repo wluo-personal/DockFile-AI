@@ -48,8 +48,10 @@ COPY ./jupyter/nbconfig /home/${user_name}/.jupyter/nbconfig
 COPY ./jupyter/custom /home/${user_name}/.jupyter/custom
 
 
+
 USER root
-RUN apt-get update && apt-get clean
+RUN apt-get update && apt-get clean \
+    && chown -R ${user_name} /home/${user_name}/.jupyter
 
 
 

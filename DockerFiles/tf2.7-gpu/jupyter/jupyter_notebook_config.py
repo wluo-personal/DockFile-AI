@@ -12,7 +12,7 @@ if os.environ.get('HostOS') == 'mac':
         c.NotebookApp.ip = '0.0.0.0'
         print('OS is mac then export app is to 0.0.0.0')
 else:
-    c.NotebookApp.ip = '*'
+    c.NotebookApp.ip = '0.0.0.0'
 
 # Configuration file for jupyter-notebook.
 
