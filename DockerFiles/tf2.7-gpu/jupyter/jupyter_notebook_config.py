@@ -5,6 +5,8 @@ c.NotebookApp.keyfile = u'/home/wei/jupyter_certs/mykey.key'
 
 c.NotebookApp.open_browser = False
 c.NotebookApp.port = 8888
+# To fix ssl issue
+c.NotebookApp.ssl_options = {"ssl_version": 5}
 
 
 import os

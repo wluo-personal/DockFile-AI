@@ -8,7 +8,6 @@ RUN docker command
 sudo docker run -it --name tfcustom --gpus all toneymall/tf2.7-gpu
 
 # 2. with volume and port mapping
-sudo docker run -it -v ~/docker:/home/wei/data -p 8890:8888 --name tfcustom --gpus all toneymall/tf2.7-gpu
 sudo docker run -it -d -v ~/docker:/home/wei/data -p 8890:8888 --name tfcustom --gpus all toneymall/tf2.7-gpu
 
 STOP docker command
@@ -24,7 +23,6 @@ python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'
 
 ### post build
 sudo docker exec -it tfcustom bash
-cp ~/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config_backup.py
-conda install -c conda-forge jupyter_contrib_nbextensions
 conda activate tf-gpu
 pip install ipykernel && python -m ipykernel install --user --name tf-gpu --display-name "tf-gpu"
+

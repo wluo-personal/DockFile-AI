@@ -47,6 +47,11 @@ COPY ./jupyter/jupyter_notebook_config.py /home/${user_name}/.jupyter
 COPY ./jupyter/nbconfig /home/${user_name}/.jupyter/nbconfig
 COPY ./jupyter/custom /home/${user_name}/.jupyter/custom
 
+USER ${user_name}
+RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
+    && yes | conda install -c conda-forge jupyter_contrib_nbextensions \
+    && pip install --upgrade nbconvert \
+    && yes | conda upgrade nbconvert
 
 
 USER root
