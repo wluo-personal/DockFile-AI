@@ -24,8 +24,6 @@ RUN  cd ~ && mkdir miniconda && cd miniconda \
     && conda init \
     && pip install jupyter_contrib_nbextensions \
     && yes | conda create --name tf-gpu python=3.9 --no-default-packages \
-    && pip install --upgrade pip \
-    && pip install tensorflow-gpu==2.7 \
     && cd /home/${user_name} && rm -rf miniconda
     # jupyter notebook config \
 
@@ -54,12 +52,22 @@ RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
     && yes | conda upgrade nbconvert
 
 
+USER ${user_name}
+RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf bash /bin/sh"]
+RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
+    && source activate tf-gpu \
+    && pip install ipykernel && python -m ipykernel install --user --name tf-gpu --display-name "tf-gpu" \
+    && pip install pandas \
+    && pip install --upgrade pip \
+    && pip install tensorflow-gpu==2.7
+
+
 USER root
 RUN apt-get update && apt-get clean \
     && chown -R ${user_name} /home/${user_name}/.jupyter
 
 
-
+RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf dash /bin/sh"]
 
 USER ${user_name}
 WORKDIR /home/${user_name}/data
