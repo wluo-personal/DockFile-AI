@@ -57,9 +57,15 @@ RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf bash /bin/sh"]
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
     && source activate tf-gpu \
     && pip install ipykernel && python -m ipykernel install --user --name tf-gpu --display-name "tf-gpu" \
-    && pip install pandas \
     && pip install --upgrade pip \
     && pip install tensorflow-gpu==2.7
+
+
+RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
+    && source activate tf-gpu \
+    && pip install pandas \
+    && pip install pillow
+
 
 
 USER root
