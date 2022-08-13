@@ -64,7 +64,9 @@ RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
     && source activate tf-gpu \
     && pip install pandas \
-    && pip install pillow
+    && pip install pillow \
+    && pip install -U scikit-image \
+    && pip install tqdm
 
 
 
