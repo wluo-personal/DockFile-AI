@@ -1,0 +1,35 @@
+sudo docker build -t toneymall/tf2.12-gpu .
+
+
+
+RUN docker command
+# ==========================
+# 1. simple
+sudo docker run -it --name tfcustom --gpus all toneymall/tf2.12-gpu
+
+# 2. with volume and port mapping
+sudo docker run -it -d -v ~/data:/home/wei/data -p 8890:8888  --name tfcustom --rm --gpus all toneymall/tf2.12-gpu
+
+STOP docker command
+################################
+sudo docker rm -f tfcustom
+
+
+verify tf-gpu output
+python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+
+
+
+
+### post build
+sudo docker exec -it tfcustom bash
+conda activate tf-gpu
+pip install ipykernel && python -m ipykernel install --user --name tf-gpu --display-name "tf-gpu"
+pip install numpy
+pip install pandas
+
+
+# ISSUE
+1. Cannot visit the docker port from outside the world.
+https://stackoverflow.com/questions/20430371/my-docker-container-has-no-internet
+
