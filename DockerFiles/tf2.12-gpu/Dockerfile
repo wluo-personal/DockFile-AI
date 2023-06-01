@@ -52,9 +52,9 @@ COPY ./jupyter/custom /home/${user_name}/.jupyter/custom
 
 USER ${user_name}
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
-    && yes | conda install -c conda-forge jupyter_contrib_nbextensions \
-    && pip install --upgrade nbconvert \
-    && yes | conda upgrade nbconvert
+    && conda run --name base conda install -c conda-forge -y jupyter_contrib_nbextensions \
+    && conda run --name base pip install --upgrade nbconvert \
+    && conda run --name base conda upgrade -y nbconvert
 
 USER ${user_name}
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
