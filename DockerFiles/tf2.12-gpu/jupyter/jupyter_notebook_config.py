@@ -2,8 +2,8 @@
 c = get_config()
 #c.NotebookApp.certfile = u'/home/kai/jupyter_certs/mycert.pem'
 #c.NotebookApp.keyfile = u'/home/kai/jupyter_certs/mykey.key'
-c.NotebookApp.certfile = u'/home/wei/.jupyter/jupyter_certs/mycert.pem'
-c.NotebookApp.keyfile = u'/home/wei/.jupyter/jupyter_certs/mykey.key'
+c.NotebookApp.certfile = u'/home/wei/jupyter_certs/mycert.pem'
+c.NotebookApp.keyfile = u'/home/wei/jupyter_certs/mykey.key'
 c.NotebookApp.ip = '*'
 c.NotebookApp.open_browser = False
 c.NotebookApp.port = 8888

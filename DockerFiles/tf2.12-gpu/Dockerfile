@@ -1,18 +1,23 @@
+# The official tf installation guidance does not work
+# Once the cuda and cudnn is correctly configured. pip install tensorflow will
+# install GPU env.
+
 ARG cuda_version=11.8.0-cudnn8-devel-ubuntu20.04
 FROM nvidia/cuda:${cuda_version}
 ARG password_root='tomcat123'
 ARG user_name='wei'
 ARG conda_version='Miniconda3-latest-Linux-x86_64.sh'
+ARG gpu_env_name='tf-gpu'
 
 RUN apt-get update && echo "root:${password_root}" | chpasswd \
     && adduser ${user_name} --gecos "Wei Luo,500,12345,12345" --disabled-password \
     && echo "${user_name}:${password_root}" | chpasswd \
-    && apt-get install -y sudo \
-        bzip2 \
-        curl \
-        vim \
-        wget \
-    && adduser ${user_name} sudo
+    && apt-get install -y sudo bzip2 curl vim wget htop \
+    && adduser ${user_name} sudo \
+    # opencv depends on below
+    && apt-get update \
+    # cv2 dependencies
+    && DEBIAN_FRONTEND=noninteractive apt-get -yq install libgl1 libglib2.0-0
 
 
 # install anaconda
@@ -23,7 +28,7 @@ RUN  cd ~ && mkdir miniconda && cd miniconda \
     && export PATH=/home/${user_name}/miniconda3/bin:$PATH \
     && conda init \
     && pip install jupyter_contrib_nbextensions \
-    && yes | conda create --name tf-gpu python=3.11 --no-default-packages \
+    && yes | conda create --name ${gpu_env_name} python=3.11 --no-default-packages \
     && cd /home/${user_name} && rm -rf miniconda
     # jupyter notebook config \
 
@@ -51,32 +56,20 @@ RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
     && pip install --upgrade nbconvert \
     && yes | conda upgrade nbconvert
 
+USER ${user_name}
+RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
+    && conda run --name ${gpu_env_name} pip install ipykernel \
+    && conda run --name ${gpu_env_name} python -m ipykernel install --user --name ${gpu_env_name} --display-name "${gpu_env_name}"
+
 
 USER ${user_name}
-RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf bash /bin/sh"]
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
-    && source activate tf-gpu \
-    && pip install ipykernel && python -m ipykernel install --user --name tf-gpu --display-name "tf-gpu" \
-    && pip install --upgrade pip \
-    && pip install tensorflow==2.12.* \
-    && python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))" \
-
-
-RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
-    && source activate tf-gpu \
-    && pip install pandas \
-    && pip install pillow \
-    && pip install -U scikit-image \
-    && pip install tqdm
-
-
+    && conda run --name ${gpu_env_name} pip install --upgrade pip \
+    && conda run --name ${gpu_env_name} pip install tensorflow==2.12.*
 
 USER root
 RUN apt-get update && apt-get clean \
     && chown -R ${user_name} /home/${user_name}/.jupyter
-
-
-RUN ["/bin/bash", "-c", "echo $password_root | sudo -S ln -sf dash /bin/sh"]
 
 USER ${user_name}
 WORKDIR /home/${user_name}/data
