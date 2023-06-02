@@ -24,9 +24,7 @@ python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'
 ### post build
 sudo docker exec -it tfcustom bash
 conda activate tf-gpu
-pip install ipykernel && python -m ipykernel install --user --name tf-gpu --display-name "tf-gpu"
-pip install numpy
-pip install pandas
+pip install poetry
 
 
 # ISSUE
