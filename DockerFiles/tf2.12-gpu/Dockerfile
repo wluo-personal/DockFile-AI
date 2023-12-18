@@ -65,8 +65,7 @@ RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
 USER ${user_name}
 RUN export PATH=/home/${user_name}/miniconda3/bin:$PATH \
     && conda run --name ${gpu_env_name} pip install --upgrade pip \
-    && conda run --name ${gpu_env_name} pip install tensorflow==2.12.* \
-    && conda run --name ${gpu_env_name} pip install pillow pandas tqdm scipy numpy
+    && conda run --name ${gpu_env_name} pip install tensorflow==2.12.*
 
 USER root
 RUN apt-get update && apt-get clean \
