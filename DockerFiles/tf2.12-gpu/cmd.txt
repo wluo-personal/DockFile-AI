@@ -8,7 +8,8 @@ RUN docker command
 sudo docker run -it --name tfcustom --gpus all toneymall/tf2.12-gpu
 
 # 2. with volume and port mapping
-sudo docker run -it -d -v ~/data:/home/wei/data -p 8890:8888  --name tfcustom --rm --gpus all toneymall/tf2.12-gpu
+# 6606 is the tensorboard
+sudo docker run -it -d -v ~/data:/home/wei/data -p 8890:8888 -p 6606:6606 --name tfcustom --rm --gpus all toneymall/tf2.12-gpu
 
 STOP docker command
 ################################
